@@ -15,7 +15,10 @@ Gauntlet.Combatants.Player = function(name) {
   this.class = null;
   this.weapon = null;
 
-  this.playerName = name || "unknown adventurer";
+  // name 
+
+  // Link the name entered in
+  this.playerName = $("#player-name").val() || "unknown adventurer";
   this.health = Math.floor(Math.random() * 40 + 50);
   this.limbs = ["head", "neck", "arm", "leg", "torso"];
   this.skinColor = "gray";
@@ -35,7 +38,8 @@ Gauntlet.Combatants.Player = function(name) {
       this.health,
       " health. ",
       (this.class.magical) ? "Able to cast " : " Wielding a ",
-      this.weapon.toString(),
+      // toString() goes here at the end
+      this.weapon,
       "!"
     ].join("");
     return output;
@@ -46,7 +50,23 @@ Gauntlet.Combatants.Player.prototype.setWeapon = function(newWeapon) {
   this.weapon = newWeapon;
 };
 
+
+Gauntlet.Combatants.Player.prototype.setClass = function(className){
+
+    this.class = className;
+    console.log("Health before",  this.health);
+    // this.health += this.class.healthBonus;
+    console.log("Health after",  this.health);
+
+    // return this.class;
+};
+
+
+
+// Attach to surprise me button 
 Gauntlet.Combatants.Player.prototype.generateClass = function() {
+
+
   // Get a random index from the allowed classes array
   var random = Math.round(Math.random() * (this.allowedClasses.length - 1));
 
@@ -91,4 +111,3 @@ Gauntlet.Combatants.Monster = function() {
 };
 
 Gauntlet.Combatants.Monster.prototype = new Gauntlet.Combatants.Player();
-
