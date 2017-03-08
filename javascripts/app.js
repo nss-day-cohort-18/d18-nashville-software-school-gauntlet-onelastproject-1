@@ -48,7 +48,10 @@ $(document).ready(function() {
         moveAlong = ($("#player-name").val() !== "");
         break;
       case "card--weapon":
-        moveAlong = ($("#player-name").val() !== "");
+        moveAlong = ((playerClass) !== undefined);
+        break;
+      case "card--battleground":
+        moveAlong = ((weaponChosen) !== undefined);
         break;
     }
 
@@ -73,6 +76,7 @@ $(document).ready(function() {
 
       // console logs the chosen class
     $(".classButton").click(function(event){
+      console.log("playerClass", playerClass);
       playerClass = event.target.textContent;
       console.log("You added the " + playerClass + " class.");
     });
@@ -172,7 +176,6 @@ $(document).ready(function() {
 
 
   $("#battleButton").click(function(event) {
-
 
     // Switch statement that will assign the weapon to the user
     switch(weaponChosen){
