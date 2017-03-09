@@ -10,10 +10,10 @@ var weaponChosen;
 // /*
 //   Test code to generate a human player and an orc player
 //  */
-var warrior = new Gauntlet.Combatants.Human();
-// warrior.setWeapon(new WarAxe());
-warrior.generateClass();  // This will be used for "Surprise me" option
-console.log(warrior.toString());
+// var warrior = new Gauntlet.Combatants.Human();
+// // warrior.setWeapon(new WarAxe());
+// warrior.generateClass();  // This will be used for "Surprise me" option
+// console.log(warrior.toString());
 
 // var orc = new Gauntlet.Combatants.Orc();
 // orc.generateClass();
@@ -77,6 +77,12 @@ $(document).ready(function() {
       console.log("You added the " + playerClass + " class.");
     });
 
+    $(".surpriseButton").click(function(event) {
+      playerClass = event.target.textContent;
+      console.log(event.target.textContent);
+      console.log("Are you crazy? Yes. Yes you are.");
+    });
+
     $(".weaponButton").click(function(event){
       weaponChosen = event.target.textContent;
       console.log("You added the " + weaponChosen + " weapon.");
@@ -90,13 +96,79 @@ $(document).ready(function() {
     /* Act on the event */
 
 
+    var player = createPlayer(playerClass);
+
+    // var playerWarrior = new Gauntlet.Combatants.Human(name);
+    // playerWarrior.generateClass();
+    // console.log(playerWarrior.toString());
+    // console.log(playerWarrior);
+  });
+
+
+  $("#battleButton").click(function(event) {
+
+
+    // Switch statement that will assign the weapon to the user
+    switch(weaponChosen){
+      case "Dagger":
+        console.log(" switch Dagger");
+        PlayerObj.setWeapon(new Dagger());
+        console.log("object after dagger", PlayerObj);
+        break;
+      case "Broad Sword":
+        console.log(" switch Broad Sword");
+        PlayerObj.setWeapon(new BroadSword());
+        console.log("object after Broad Sword", PlayerObj);
+        break;
+      case "War Axe":
+        console.log(" switch War Axe");
+        PlayerObj.setWeapon(new WarAxe());
+        console.log("object after WarAxe", PlayerObj);
+        break;
+      case "Mace":
+        console.log(" switch Mace");
+        PlayerObj.setWeapon(new Mace());
+        console.log("object after Mace", PlayerObj);
+        break;
+      case "Spear":
+        console.log(" switch Spear");
+        PlayerObj.setWeapon(new Spear());
+        console.log("object after Spear", PlayerObj);
+        break;
+      case "Warhammer":
+        console.log(" switch Warhammer");
+        PlayerObj.setWeapon(new Warhammer());
+        console.log("object after Warhammer", PlayerObj);
+        break;
+      case "Club":
+        console.log(" switch Club");
+        PlayerObj.setWeapon(new Club());
+        console.log("object after Club", PlayerObj);
+        break;
+      case "LongSword":
+        console.log(" switch LongSword");
+        PlayerObj.setWeapon(new LongSword());
+        console.log("object after LongSword", PlayerObj);
+        break;
+    }
+
+  });
+
+
+
+  function createPlayer(playerClass) {
+
+    console.log(playerClass);
+
+   
+
     // Switch statement that will assign the class to the user
     switch(playerClass){
       case "Warrior":
 
         PlayerObj = new Gauntlet.GuildHall.Warrior(name);
         PlayerObj.setClass("Warrior");
-        console.log(PlayerObj.health);
+        console.log(PlayerObj);
         break;
       case "Wizard":
 
@@ -158,67 +230,68 @@ $(document).ready(function() {
         PlayerObj.setClass("Shaman");
         console.log(PlayerObj);
         break;
-      case "Surprise":
-        console.log(" switch Surprise");
+      case "surprise me":
+
+        PlayerObj = new Gauntlet.GuildHall.Random(name);
+        PlayerObj.setClass("Random")
+        console.log("switch surprise");
         break;
+
     }
 
+    return PlayerObj;
 
-    // var playerWarrior = new Gauntlet.Combatants.Human(name);
-    // playerWarrior.generateClass();
-    // console.log(playerWarrior.toString());
-    // console.log(playerWarrior);
-  });
+  }
 
 
-  $("#battleButton").click(function(event) {
+
+  // Test surprise function
+
+  Gauntlet.GuildHall.Random = function() {
 
 
-    // Switch statement that will assign the weapon to the user
-    switch(weaponChosen){
-      case "Dagger":
-        console.log(" switch Dagger");
-        PlayerObj.setWeapon(new Dagger());
-        console.log("object after dagger", PlayerObj);
-        break;
-      case "Broad Sword":
-        console.log(" switch Broad Sword");
-        PlayerObj.setWeapon(new BroadSword());
-        console.log("object after Broad Sword", PlayerObj);
-        break;
-      case "War Axe":
-        console.log(" switch War Axe");
-        PlayerObj.setWeapon(new WarAxe());
-        console.log("object after WarAxe", PlayerObj);
-        break;
-      case "Mace":
-        console.log(" switch Mace");
-        PlayerObj.setWeapon(new Mace());
-        console.log("object after Mace", PlayerObj);
-        break;
-      case "Spear":
-        console.log(" switch Spear");
-        PlayerObj.setWeapon(new Spear());
-        console.log("object after Spear", PlayerObj);
-        break;
-      case "Warhammer":
-        console.log(" switch Warhammer");
-        PlayerObj.setWeapon(new Warhammer());
-        console.log("object after Warhammer", PlayerObj);
-        break;
-      case "Club":
-        console.log(" switch Club");
-        PlayerObj.setWeapon(new Club());
-        console.log("object after Club", PlayerObj);
-        break;
-      case "LongSword":
-        console.log(" switch LongSword");
-        PlayerObj.setWeapon(new LongSword());
-        console.log("object after LongSword", PlayerObj);
-        break;
-    }
+    // var allowedClasses = ["Warrior"];
 
-  });
+    // // // // // // // // // // // // //
+
+    // The code below is the old logic  //
+
+    // // // // // // // // // // // // //
+
+
+    
+
+
+    console.log("You're in here!");
+
+    // Get a random index from the allowed classes array
+    var random = Math.round(Math.random() * (this.allowedClasses.length - 1));
+
+    // Get the string at the index
+    var randomClass = this.allowedClasses[random];
+    console.log(this.allowedClasses[random]);
+
+
+    var randomPlayer = createPlayer(randomClass);
+    // Composes the corresponding player class into the player object
+    // this.class = new Gauntlet.GuildHall[randomClass]();
+
+    // Add the health bonus
+    // this.health += this.class.healthBonus;
+    // return this.class;
+    return randomPlayer;
+
+  };
+  Gauntlet.GuildHall.Random.prototype = new Gauntlet.GuildHall.PlayerClass();
+
+
+
+
+
+
+
+
+
 
 
 

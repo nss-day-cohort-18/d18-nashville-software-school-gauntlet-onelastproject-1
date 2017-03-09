@@ -54,9 +54,9 @@ Gauntlet.Combatants.Player.prototype.setWeapon = function(newWeapon) {
 Gauntlet.Combatants.Player.prototype.setClass = function(className){
 
     this.class = className;
-    console.log("Health before",  this.health);
+    // console.log("Health before",  this.health);
     // this.health += this.class.healthBonus;
-    console.log("Health after",  this.health);
+    // console.log("Health after",  this.health);
 
     // return this.class;
 };
@@ -66,19 +66,7 @@ Gauntlet.Combatants.Player.prototype.setClass = function(className){
 // Attach to surprise me button 
 Gauntlet.Combatants.Player.prototype.generateClass = function() {
 
-
-  // Get a random index from the allowed classes array
-  var random = Math.round(Math.random() * (this.allowedClasses.length - 1));
-
-  // Get the string at the index
-  var randomClass = this.allowedClasses[random];
-
-  // Composes the corresponding player class into the player object
-  this.class = new Gauntlet.GuildHall[randomClass]();
-
-  // Add the health bonus
-  this.health += this.class.healthBonus;
-  return this.class;
+  
 };
 
 /*
