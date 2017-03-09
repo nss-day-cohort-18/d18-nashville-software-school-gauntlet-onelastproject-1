@@ -65,3 +65,5 @@ var LongSword = function() {
   this.hands = 1;
 };
 LongSword.prototype = new Weapon();
+
+module.exports = {LongSword, Club, WarHammer, Spear, Mace, WarAxe, BroadSword, Dagger, Weapon};

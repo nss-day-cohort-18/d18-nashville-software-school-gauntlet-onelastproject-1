@@ -7,12 +7,19 @@ var EnemyObj;
 var PlayerObj;
 var weaponChosen;
 
+let Gauntlet = require("./classes.js");
+let CreatePlayer = require("./CreatPlayer.js");
+let Weapons = require("./ChooseWeapon.js");
+
+console.log("CreatePlaterObj: ", CreatePlayer);
+
 // Test code to generate a spell
 // var spell = new Gauntlet.SpellBook.Sphere();
 // console.log("spell: ", spell.toString());
 
-
 $(document).ready(function() {
+
+    console.log("Gauntlet: ", Gauntlet);
 
     // Show the initial view that accepts player name
     $("#player-setup").show();
@@ -42,21 +49,41 @@ $(document).ready(function() {
     });
     // When user submits what class they want to play
     $("#selectWeapon").click(function(event) {
-        var player = createPlayer(playerClass);
+        console.log("Gauntlet: ", Gauntlet);
+        PlayerObj = CreatePlayer.createPlayer(playerClass, PlayerObj);
     });
 
     // When user chooses weapon
     $("#battleButton").click(function(event) {
-        var weaponOfChoice = chooseWeapon(weaponChosen);
+        console.log("Gauntlet: ", Gauntlet);
+        var weaponOfChoice = Weapons.chooseWeapon(weaponChosen, PlayerObj);
+
+
         // Enemy
-        createEnemy();
-        EnemyObj.weapon = "Flamethrower";
+        // createEnemy();
+
+        // EnemyObj.weapon = "Flamethrower";
         console.log("ENEMY: " ,EnemyObj);
+        console.log("[BEFORE] Player 1 Health: ", PlayerObj.health);
+        // console.log("[BEFORE] Enemy Health: ", EnemyObj.health);
+    });
+
+// Attack Button
+    $("#attackButton").click(function(event) {        
+
+        console.log("[BEFORE] Player 1 Damage: ", PlayerObj.strength);
+        // console.log("[BEFORE] Enemy Damage: ", EnemyObj.strength);
+
+        // attack(PlayerObj, EnemyObj);
+        // populateNewHealth(PlayerObj, EnemyObj);
+
     });
 
     // Creates the random enemy
     function createEnemy () {
-        EnemyObj = new Gauntlet.GuildHall.Random(name);
+        console.log("{BEFORE} Player: ", PlayerObj);
+        EnemyObj = new Gauntlet.GuildHall.Random(name, PlayerObj);
+        console.log("{AFTER} Player: ", PlayerObj);
         EnemyObj.setClass("Random");
     }
  
@@ -79,7 +106,7 @@ $(document).ready(function() {
             case "card--battleground":
                 moveAlong = ((weaponChosen) !== undefined);
                 break;
-            }
+        }
 
         if (moveAlong) {
             $(".card").hide();

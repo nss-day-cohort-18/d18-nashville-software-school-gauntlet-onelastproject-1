@@ -54,11 +54,7 @@ Gauntlet.Combatants.Player.prototype.setWeapon = function(newWeapon) {
 Gauntlet.Combatants.Player.prototype.setClass = function(className){
 
     this.class = className;
-    // console.log("Health before",  this.health);
-    // this.health += this.class.healthBonus;
-    // console.log("Health after",  this.health);
 
-    // return this.class;
 };
 
 
@@ -99,3 +95,5 @@ Gauntlet.Combatants.Monster = function() {
 };
 
 Gauntlet.Combatants.Monster.prototype = new Gauntlet.Combatants.Player();
+
+module.exports = {Gauntlet};
