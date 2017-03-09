@@ -1,6 +1,5 @@
 "use strict";
 
-
 var name;
 var playerClass;
 var EnemyObj = {};
