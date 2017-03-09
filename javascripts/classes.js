@@ -176,3 +176,29 @@ Gauntlet.GuildHall.Stealth.prototype = new Gauntlet.GuildHall.PlayerClass();
 
 
 
+////////////////// Other Methods //////////////////////////
+
+
+
+  Gauntlet.GuildHall.Random = function() {
+
+
+    var randomSkin;
+
+    this.species = "Human";
+    this.intelligence = this.intelligence + 20;
+
+    this.skinColors.push("brown", "red", "white", "disease");
+    randomSkin = Math.round(Math.random() * (this.skinColors.length-1));
+    this.skinColor = this.skinColors[randomSkin];
+
+    var randomClasses= ["Warrior", "Valkyrie", "Berserker", "Monk", "Wizard", "Sorcerer", "Conjurer", "Shaman", "Thief", "Ninja", "Assassin" ];
+    // Get a random index from the allowed classes array
+    var random = Math.round(Math.random() * (randomClasses.length - 1));
+    // Get the string at the index
+    var randomClass = randomClasses[random];
+    var randomPlayer = createPlayer(randomClass);
+    return randomPlayer;
+
+  };
+  Gauntlet.GuildHall.Random.prototype = new Gauntlet.GuildHall.PlayerClass();
