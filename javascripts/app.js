@@ -10,6 +10,7 @@ var weaponChosen;
 let Gauntlet = require("./classes.js");
 let CreatePlayer = require("./CreatPlayer.js");
 let Weapons = require("./ChooseWeapon.js");
+let Battle = require("./Battle.js");
 
 console.log("CreatePlaterObj: ", CreatePlayer);
 
@@ -56,7 +57,9 @@ $(document).ready(function() {
     // When user chooses weapon
     $("#battleButton").click(function(event) {
         console.log("Gauntlet: ", Gauntlet);
-        var weaponOfChoice = Weapons.chooseWeapon(weaponChosen, PlayerObj);
+        PlayerObj = Weapons.chooseWeapon(weaponChosen, PlayerObj);
+        Battle.printToDom(PlayerObj);
+
 
 
         // Enemy
