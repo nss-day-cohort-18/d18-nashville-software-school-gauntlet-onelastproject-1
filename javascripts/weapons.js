@@ -10,6 +10,7 @@ var Weapon = function() {
   };
 };
 
+
 var Dagger = function() {
   this.name = "dagger";
   this.damage = 4;
