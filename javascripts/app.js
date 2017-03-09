@@ -62,11 +62,11 @@ $(document).ready(function() {
 // Attack Button
     $("#attackButton").click(function(event) {        
 
-        console.log("Enemy Health: ", EnemyObj.health);
-        console.log("Player Health: ", PlayerObj.health);
-        console.log("-----------------");
-        console.log("Enemy Strength: ", EnemyObj.strength);
-        console.log("Player Strength: ", PlayerObj.strength);
+        // console.log("Enemy Health: ", EnemyObj.health);
+        // console.log("Player Health: ", PlayerObj.health);
+        // console.log("-----------------");
+        // console.log("Enemy Strength: ", EnemyObj.strength);
+        // console.log("Player Strength: ", PlayerObj.strength);
         if(Battle.attack(PlayerObj, EnemyObj)){
             console.log("1st True");
             Battle.printToDom(PlayerObj, EnemyObj);
@@ -78,8 +78,6 @@ $(document).ready(function() {
             Battle.printToDom(PlayerObj, EnemyObj);
             console.log("GAME 2 ELSE");
         }
-        // Battle.attack(EnemyObj, PlayerObj);
-
     });
 
     // Creates the random enemy
@@ -91,7 +89,6 @@ $(document).ready(function() {
             strength: (Math.floor(Math.random() * 50) + 1.8).toFixed(0),
             intelligence: (Math.floor(Math.random() * 51) + 1.1).toFixed(0),
         };
-        
         var Flamethrower = {
             name: "Flamethrower",
             hands: 2,
