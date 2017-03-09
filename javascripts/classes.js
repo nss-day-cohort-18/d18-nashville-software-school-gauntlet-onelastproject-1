@@ -174,3 +174,5 @@ Gauntlet.GuildHall.Stealth.prototype = new Gauntlet.GuildHall.PlayerClass();
         };
         Gauntlet.GuildHall.Assassin.prototype = new Gauntlet.GuildHall.Stealth();
 
+
+
