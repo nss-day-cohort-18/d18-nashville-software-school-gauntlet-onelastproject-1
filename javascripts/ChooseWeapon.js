@@ -31,10 +31,10 @@
         PlayerObj.setWeapon(new Weapons.Spear());
         console.log("object after Spear", PlayerObj);
         break;
-      case "Warhammer":
-        console.log(" switch Warhammer");
-        PlayerObj.setWeapon(new Weapons.Warhammer());
-        console.log("object after Warhammer", PlayerObj);
+      case "WarHammer":
+        console.log(" switch War Hammer");
+        PlayerObj.setWeapon(new Weapons.WarHammer());
+        console.log("object after WarHammer", PlayerObj);
         break;
       case "Club":
         console.log(" switch Club");
@@ -47,6 +47,7 @@
         console.log("object after LongSword", PlayerObj);
         break;
     }
+    return PlayerObj;
   }
 
 module.exports = {chooseWeapon};
