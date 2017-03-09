@@ -25,8 +25,8 @@ function printToDom(PlayerObj, EnemyObj) {
 function attack(defender, attacker){
 
     defender.health = defender.health - attacker.strength;
-    // attacker.health = attacker.health = defender.strength;
     if(defender.health <= 0){
+        defender.health = 0;
         finalScreen(defender, attacker);
         return false;
     }else{
