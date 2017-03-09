@@ -3,7 +3,7 @@
 
 var name;
 var playerClass;
-var EnemyObj;
+var EnemyObj = {};
 var PlayerObj;
 var weaponChosen;
 
@@ -11,11 +11,6 @@ let Gauntlet = require("./classes.js");
 let CreatePlayer = require("./CreatPlayer.js");
 let Weapons = require("./ChooseWeapon.js");
 
-console.log("CreatePlaterObj: ", CreatePlayer);
-
-// Test code to generate a spell
-// var spell = new Gauntlet.SpellBook.Sphere();
-// console.log("spell: ", spell.toString());
 
 $(document).ready(function() {
 
@@ -55,36 +50,42 @@ $(document).ready(function() {
 
     // When user chooses weapon
     $("#battleButton").click(function(event) {
-        console.log("Gauntlet: ", Gauntlet);
         var weaponOfChoice = Weapons.chooseWeapon(weaponChosen, PlayerObj);
 
 
         // Enemy
-        // createEnemy();
+        var myEnemy = createEnemy();
 
-        // EnemyObj.weapon = "Flamethrower";
-        console.log("ENEMY: " ,EnemyObj);
-        console.log("[BEFORE] Player 1 Health: ", PlayerObj.health);
-        // console.log("[BEFORE] Enemy Health: ", EnemyObj.health);
+
+        console.log("FINAL ENEMY: ", myEnemy);
+
     });
 
 // Attack Button
     $("#attackButton").click(function(event) {        
 
         console.log("[BEFORE] Player 1 Damage: ", PlayerObj.strength);
-        // console.log("[BEFORE] Enemy Damage: ", EnemyObj.strength);
 
-        // attack(PlayerObj, EnemyObj);
-        // populateNewHealth(PlayerObj, EnemyObj);
 
     });
 
     // Creates the random enemy
     function createEnemy () {
-        console.log("{BEFORE} Player: ", PlayerObj);
-        EnemyObj = new Gauntlet.GuildHall.Random(name, PlayerObj);
-        console.log("{AFTER} Player: ", PlayerObj);
-        EnemyObj.setClass("Random");
+
+        EnemyObj = {
+            name: "Enemy",
+            healthBonus: (Math.floor(Math.random() * 49) + 1.5).toFixed(0),
+            strengthBonus: (Math.floor(Math.random() * 50) + 1.8).toFixed(0),
+            intelligenceBonus: (Math.floor(Math.random() * 51) + 1.1).toFixed(0),
+        };
+        
+        var Flamethrower = {
+            name: "Flamethrower",
+            hands: 2,
+            damage: (Math.floor(Math.random() * 50) + 1)
+        };
+        EnemyObj.Weapon = Flamethrower;
+        return EnemyObj;
     }
  
     /*****************/
