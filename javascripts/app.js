@@ -51,28 +51,34 @@ $(document).ready(function() {
 
     // When user chooses weapon
     $("#battleButton").click(function(event) {
-        // HEAD
-        // var weaponOfChoice = Weapons.chooseWeapon(weaponChosen, PlayerObj);
-        // END HEAD
-        console.log("Gauntlet: ", Gauntlet);
+        // Set Player Weapon
+        // Create Enemy
         PlayerObj = Weapons.chooseWeapon(weaponChosen, PlayerObj);
-        Battle.printToDom(PlayerObj);
-
-
-
-        // Enemy
-        var myEnemy = createEnemy();
-
-
-        console.log("FINAL ENEMY: ", myEnemy);
-
+        EnemyObj = createEnemy();
+        Battle.printToDom(PlayerObj, EnemyObj);
+        console.log("FINAL ENEMY: ", EnemyObj);
     });
 
 // Attack Button
     $("#attackButton").click(function(event) {        
 
-        console.log("[BEFORE] Player 1 Damage: ", PlayerObj.strength);
-
+        console.log("Enemy Health: ", EnemyObj.health);
+        console.log("Player Health: ", PlayerObj.health);
+        console.log("-----------------");
+        console.log("Enemy Strength: ", EnemyObj.strength);
+        console.log("Player Strength: ", PlayerObj.strength);
+        if(Battle.attack(PlayerObj, EnemyObj)){
+            console.log("1st True");
+            Battle.printToDom(PlayerObj, EnemyObj);
+        }
+        if(Battle.attack(EnemyObj, PlayerObj)){
+            console.log("2nd True");
+            Battle.printToDom(PlayerObj, EnemyObj);
+        }else{
+            Battle.printToDom(PlayerObj, EnemyObj);
+            console.log("GAME 2 ELSE");
+        }
+        // Battle.attack(EnemyObj, PlayerObj);
 
     });
 
@@ -81,9 +87,9 @@ $(document).ready(function() {
 
         EnemyObj = {
             name: "Enemy",
-            healthBonus: (Math.floor(Math.random() * 49) + 1.5).toFixed(0),
-            strengthBonus: (Math.floor(Math.random() * 50) + 1.8).toFixed(0),
-            intelligenceBonus: (Math.floor(Math.random() * 51) + 1.1).toFixed(0),
+            health: (Math.floor(Math.random() * 75) + 20).toFixed(0),
+            strength: (Math.floor(Math.random() * 50) + 1.8).toFixed(0),
+            intelligence: (Math.floor(Math.random() * 51) + 1.1).toFixed(0),
         };
         
         var Flamethrower = {

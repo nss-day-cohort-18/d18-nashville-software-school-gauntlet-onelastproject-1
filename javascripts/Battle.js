@@ -1,36 +1,50 @@
 "use strict";
 
-function printToDom(PlayerObj) {
+function printToDom(PlayerObj, EnemyObj) {
+    console.log("EnemyObject: ", EnemyObj);
+
     console.log("clicked printToDom");
     $("#player1").empty();
+    $("#player2").empty();
     let player1Card =   `<p>Player Name: ${PlayerObj.playerName}</p>
     <p>Fighter Class: ${PlayerObj.name}</p>
     <p>Weapon: ${PlayerObj.weapon}</p>
     <p>Health: ${PlayerObj.health}</p>
     `;
-    // let enemyCard = `<p>Player Name: ???</p>
-    // <p>Fighter Class: ${EnemyObj.name}</p>
-    // <p>Weapon: ${EnemyObj.weapon}</p>
-    // <p>Health: ${EnemyObj.health}</p>
-    // `
+    let enemyCard = `<p>Player Name: ???</p>
+    <p>Fighter Class: ${EnemyObj.name}</p>
+    <p>Weapon: ${EnemyObj.weapon}</p>
+    <p>Health: ${EnemyObj.health}</p>
+    `;
                           
     $("#player1").append(player1Card);
-    // $("#player2").append(enemyCard);
+    $("#player2").append(enemyCard);
   }
 
 
-function attack(myPlayerObj, myEnemyObj){
+function attack(defender, attacker){
 
-	// myPlayerObj.health = myPlayerObj.health - myEnemyObj.strength;
-	// myEnemyObj.health = myEnemyObj.health - myPlayerObj.strength;
-	console.log("[MID] PlayerOBj Damage: ", myPlayerObj.strength - myPlayerObj.strengthBonus);
-	console.log("[MID] EnemyObj Damage: ", myEnemyObj.strength - myEnemyObj.strengthBonus);
+    defender.health = defender.health - attacker.strength;
+    // attacker.health = attacker.health = defender.strength;
+    if(defender.health <= 0){
+        finalScreen(defender, attacker);
+        return false;
+    }else{
+        return true;
+    }
+    console.log("Defender Health: ", defender.health);
 
 }
 
 function populateNewHealth(myPlayerObj, myEnemyObj){
 	console.log("[AFTER ATTACK] MyPlayer Health: ", myPlayerObj.health);
 	console.log("[AFTER ATTACK] Enemy Health: ", myEnemyObj.health);
+}
+
+function finalScreen(defender, attacker){
+    console.log("GAME OVER -- ", defender.name + " LOSES");
+    console.log("ATTACKER: ", attacker);
+    console.log("DEFENDER: ", defender);
 }
 
 module.exports={printToDom, attack, populateNewHealth};
