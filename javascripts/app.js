@@ -4,6 +4,7 @@
 var name;
 var playerClass;
 // Player Object being built
+var EnemyObj;
 var PlayerObj;
 var weaponChosen;
 
@@ -15,10 +16,10 @@ var weaponChosen;
 // warrior.generateClass();  // This will be used for "Surprise me" option
 // console.log(warrior.toString());
 
-// var orc = new Gauntlet.Combatants.Orc();
-// orc.generateClass();
-// // orc.setWeapon(new BroadSword());
-// console.log(orc.toString());
+var orc = new Gauntlet.Combatants.Orc();
+orc.generateClass();
+// orc.setWeapon(new BroadSword());
+console.log(orc.toString());
 
 /*
   Test code to generate a spell
@@ -102,15 +103,115 @@ $(document).ready(function() {
 
     var player = createPlayer(playerClass);
 
-    // var playerWarrior = new Gauntlet.Combatants.Human(name);
-    // playerWarrior.generateClass();
-    // console.log(playerWarrior.toString());
-    // console.log(playerWarrior);
+
+
+
   });
 
 
   $("#battleButton").click(function(event) {
 
+
+    var weaponOfChoice = chooseWeapon(weaponChosen);
+
+
+    // Enemy
+    createEnemy();
+    EnemyObj.weapon = "Flamethrower";
+    console.log("ENEMY: " ,EnemyObj);
+
+  });
+
+
+
+  function createPlayer(playerClass) {
+
+    
+
+      
+
+    // Switch statement that will assign the class to the user
+    switch(playerClass){
+      case "Warrior":
+
+        PlayerObj = new Gauntlet.GuildHall.Warrior(name);
+        PlayerObj.setClass("Warrior");
+        
+        break;
+      case "Wizard":
+
+        PlayerObj = new Gauntlet.GuildHall.Wizard(name);
+        PlayerObj.setClass("Wizard");
+        
+        break;
+      case "Thief":
+
+        PlayerObj = new Gauntlet.GuildHall.Thief(name);
+        PlayerObj.setClass("Thief");
+        
+        break;
+      case "Valkyrie":
+
+        PlayerObj = new Gauntlet.GuildHall.Valkyrie(name);
+        PlayerObj.setClass("Valkyrie");
+        break;
+      case "Sorcerer":
+
+        PlayerObj = new Gauntlet.GuildHall.Sorcerer(name);
+        PlayerObj.setClass("Sorcerer");
+        
+        break;
+      case "Ninja":
+        
+        PlayerObj = new Gauntlet.GuildHall.Ninja(name);
+        PlayerObj.setClass("Ninja");
+        
+        break;
+      case "Berserker":
+        
+        PlayerObj = new Gauntlet.GuildHall.Berserker(name);
+        PlayerObj.setClass("Berserker");
+        
+        break;
+      case "Conjurer":
+        
+        PlayerObj = new Gauntlet.GuildHall.Conjurer(name);
+        PlayerObj.setClass("Conjurer");
+        
+        break;
+      case "Assassin":
+        
+        PlayerObj = new Gauntlet.GuildHall.Assassin(name);
+        PlayerObj.setClass("Assassin");
+        
+        break;
+      case "Monk":
+        
+        PlayerObj = new Gauntlet.GuildHall.Monk(name);
+        PlayerObj.setClass("Monk");
+        
+        break;
+      case "Shaman":
+        
+        PlayerObj = new Gauntlet.GuildHall.Shaman(name);
+        PlayerObj.setClass("Shaman");
+        
+        break;
+      case "surprise me":
+
+        PlayerObj = new Gauntlet.GuildHall.Random(name);
+        PlayerObj.setClass("Random")
+        console.log("switch surprise");
+        break;
+
+    }
+
+    return PlayerObj;
+
+  }
+
+
+  function chooseWeapon() {
 
     // Switch statement that will assign the weapon to the user
     switch(weaponChosen){
@@ -155,97 +256,19 @@ $(document).ready(function() {
         console.log("object after LongSword", PlayerObj);
         break;
     }
-
-  });
-
-
-
-  function createPlayer(playerClass) {
-
-    console.log(playerClass);
-
-   
-
-    // Switch statement that will assign the class to the user
-    switch(playerClass){
-      case "Warrior":
-
-        PlayerObj = new Gauntlet.GuildHall.Warrior(name);
-        PlayerObj.setClass("Warrior");
-        console.log(PlayerObj);
-        break;
-      case "Wizard":
-
-        PlayerObj = new Gauntlet.GuildHall.Wizard(name);
-        PlayerObj.setClass("Wizard");
-        console.log(PlayerObj);
-        break;
-      case "Thief":
-
-        PlayerObj = new Gauntlet.GuildHall.Thief(name);
-        PlayerObj.setClass("Thief");
-        console.log(PlayerObj);
-        break;
-      case "Valkyrie":
-
-        PlayerObj = new Gauntlet.GuildHall.Valkyrie(name);
-        PlayerObj.setClass("Valkyrie");
-        console.log(PlayerObj);
-        break;
-      case "Sorcerer":
-
-        PlayerObj = new Gauntlet.GuildHall.Sorcerer(name);
-        PlayerObj.setClass("Sorcerer");
-        console.log(PlayerObj);
-        break;
-      case "Ninja":
-        
-        PlayerObj = new Gauntlet.GuildHall.Ninja(name);
-        PlayerObj.setClass("Ninja");
-        console.log(PlayerObj);
-        break;
-      case "Berserker":
-        
-        PlayerObj = new Gauntlet.GuildHall.Berserker(name);
-        PlayerObj.setClass("Berserker");
-        console.log(PlayerObj);
-        break;
-      case "Conjurer":
-        
-        PlayerObj = new Gauntlet.GuildHall.Conjurer(name);
-        PlayerObj.setClass("Conjurer");
-        console.log(PlayerObj);
-        break;
-      case "Assassin":
-        
-        PlayerObj = new Gauntlet.GuildHall.Assassin(name);
-        PlayerObj.setClass("Assassin");
-        console.log(PlayerObj);
-        break;
-      case "Monk":
-        
-        PlayerObj = new Gauntlet.GuildHall.Monk(name);
-        PlayerObj.setClass("Monk");
-        console.log(PlayerObj);
-        break;
-      case "Shaman":
-        
-        PlayerObj = new Gauntlet.GuildHall.Shaman(name);
-        PlayerObj.setClass("Shaman");
-        console.log(PlayerObj);
-        break;
-      case "surprise me":
-
-        PlayerObj = new Gauntlet.GuildHall.Random(name);
-        PlayerObj.setClass("Random")
-        console.log("switch surprise");
-        break;
-
-    }
-
-    return PlayerObj;
-
   }
+
+
+  function createEnemy () {
+
+    EnemyObj = new Gauntlet.GuildHall.Random(name);
+    EnemyObj.setClass("Random");
+  }
+ 
+
+
+
+
 
 
 
@@ -254,26 +277,22 @@ $(document).ready(function() {
   Gauntlet.GuildHall.Random = function() {
 
 
-    // var allowedClasses = ["Warrior"];
+    var randomSkin;
 
-    // // // // // // // // // // // // //
+    this.species = "Human";
+    this.intelligence = this.intelligence + 20;
 
-    // The code below is the old logic  //
+    this.skinColors.push("brown", "red", "white", "disease");
+    randomSkin = Math.round(Math.random() * (this.skinColors.length-1));
+    this.skinColor = this.skinColors[randomSkin];
 
-    // // // // // // // // // // // // //
-
-
-    
-
-
-    console.log("You're in here!");
+    var randomClasses= ["Warrior", "Valkyrie", "Berserker", "Monk", "Wizard", "Sorcerer", "Conjurer", "Shaman", "Thief", "Ninja", "Assassin" ];
 
     // Get a random index from the allowed classes array
-    var random = Math.round(Math.random() * (this.allowedClasses.length - 1));
+    var random = Math.round(Math.random() * (randomClasses.length - 1));
 
     // Get the string at the index
-    var randomClass = this.allowedClasses[random];
-    console.log(this.allowedClasses[random]);
+    var randomClass = randomClasses[random];
 
 
     var randomPlayer = createPlayer(randomClass);
