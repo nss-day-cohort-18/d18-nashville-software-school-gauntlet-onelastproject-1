@@ -2,7 +2,20 @@
 "use strict";
 
 function printToDom(PlayerObj, EnemyObj) {
-    console.log("EnemyObject: ", EnemyObj);
+    var enemyInitialHealth = EnemyObj.initialHealth;
+    var enemyCurrentHealth = EnemyObj.health;
+
+    var playerInitialHealth = PlayerObj.initialHealth;
+    var playerCurrentHealth = PlayerObj.health;
+
+    var enemyPercentage = ((enemyCurrentHealth / enemyInitialHealth) * 100) + "%";
+    var playerPercentage = ((playerCurrentHealth / playerInitialHealth) * 100) + "%";
+
+    console.log("() Enemy Percentage: ", enemyPercentage);
+    console.log("() Player Percentage: ", playerPercentage);
+
+
+
 
     console.log("clicked printToDom");
     $("#player1").empty();
@@ -13,34 +26,39 @@ function printToDom(PlayerObj, EnemyObj) {
     // HP
     // Class & Weapon (Left to Right)
 
-    let player1Card =   `<p>Elder Sage${PlayerObj.playerName}</p>
+    let player1Card =   `<p>Elder Sage ${PlayerObj.playerName}</p>
     <p>HP: ${PlayerObj.health}</p>
     <div class="progress">
-        <div class="progress-bar progress-edit" role="progressbar" aria-valuenow="40"
-        aria-valuemin="0" aria-valuemax="100" style="width:100%">
+        <div id="player1-progress" class="progress-bar progress-edit" role="progressbar" aria-valuenow="40"
+        aria-valuemin="0" aria-valuemax="100" style="width:${playerPercentage}">
             <span class="sr-only">70% Complete</span>
         </div>
     </div>
     <p><span>${PlayerObj.name}</span> <span class="span-float-right">${PlayerObj.weapon}</span></p>
     `;
-    let enemyCard = `<p>Player Name: ???</p>
+    let enemyCard = `<p>???</p>
     <p>HP: ${EnemyObj.health}</p>
     <div class="progress">
-        <div class="progress-bar progress-edit" role="progressbar" aria-valuenow="70"
-        aria-valuemin="0" aria-valuemax="100" style="width:70%">
+        <div id="player2-progress"  class="progress-bar progress-edit" role="progressbar" aria-valuenow="70"
+        aria-valuemin="0" aria-valuemax="100" style="width:${enemyPercentage}">
             <span class="sr-only">70% Complete</span>
         </div>
     </div>
     <p><span>${EnemyObj.name}</span> <span class="span-float-right">${EnemyObj.weapon.name}</span></p>
 
     `;
-                          
+    
+
+
+
+
     $("#player1").append(player1Card);
     $("#player2").append(enemyCard);
   }
 
 
 function attack(defender, attacker){
+
 
     defender.health = defender.health - attacker.strength;
     if(defender.health <= 0){
@@ -127,7 +145,7 @@ module.exports = {chooseWeapon};
 let Classes = require("./classes.js");
 Classes.Gauntlet = {};
 
-  function createPlayer(playerClass, PlayerObj) {
+  function createPlayer(playerClass, PlayerObj, name) {
 
     console.log("Classes in Creat: ", Classes);
 
@@ -260,16 +278,19 @@ $(document).ready(function() {
     // When user submits what class they want to play
     $("#selectWeapon").click(function(event) {
         console.log("Gauntlet: ", Gauntlet);
-        PlayerObj = CreatePlayer.createPlayer(playerClass, PlayerObj);
+        PlayerObj = CreatePlayer.createPlayer(playerClass, PlayerObj, name);
     });
 
     // When user chooses weapon
     $("#battleButton").click(function(event) {
-        // Set Player Weapon
+        console.log("Setting Health Bar");
+        // style="width:0%"
         // Create Enemy
         PlayerObj = Weapons.chooseWeapon(weaponChosen, PlayerObj);
         EnemyObj = createEnemy();
         Battle.printToDom(PlayerObj, EnemyObj);
+        $("#player2-progress").css("width", '100%');
+        $("#player1-progress").css("width", '100%');        
         console.log("FINAL ENEMY: ", EnemyObj);
     });
 
@@ -283,9 +304,13 @@ $(document).ready(function() {
         // console.log("Player Strength: ", PlayerObj.strength);
         if(Battle.attack(PlayerObj, EnemyObj)){
             console.log("1st True");
+            $("#player2-progress").css("width", '100%');
+            $("#player1-progress").css("width", '100%'); 
             Battle.printToDom(PlayerObj, EnemyObj);
         }
         if(Battle.attack(EnemyObj, PlayerObj)){
+            $("#player2-progress").css("width", '100%');
+            $("#player1-progress").css("width", '100%'); 
             console.log("2nd True");
             Battle.printToDom(PlayerObj, EnemyObj);
         }else{
@@ -296,10 +321,11 @@ $(document).ready(function() {
 
     // Creates the random enemy
     function createEnemy () {
-
+        let tempHealth = (Math.floor(Math.random() * 75) + 20).toFixed(0);
         EnemyObj = {
             name: "Enemy",
-            health: (Math.floor(Math.random() * 75) + 20).toFixed(0),
+            health: tempHealth,
+            initialHealth: tempHealth,
             strength: (Math.floor(Math.random() * 50) + 1.8).toFixed(0),
             intelligence: (Math.floor(Math.random() * 51) + 1.1).toFixed(0),
         };
@@ -580,6 +606,7 @@ Gauntlet.Combatants.Player = function(name) {
   // Link the name entered in
   this.playerName = $("#player-name").val() || "unknown adventurer";
   this.health = Math.floor(Math.random() * 40 + 50);
+  this.initialHealth = this.health;
   this.limbs = ["head", "neck", "arm", "leg", "torso"];
   this.skinColor = "gray";
   this.skinColors = [this.skinColor];
