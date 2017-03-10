@@ -45,7 +45,7 @@ $(document).ready(function() {
     // When user submits what class they want to play
     $("#selectWeapon").click(function(event) {
         console.log("Gauntlet: ", Gauntlet);
-        PlayerObj = CreatePlayer.createPlayer(playerClass, PlayerObj);
+        PlayerObj = CreatePlayer.createPlayer(playerClass, PlayerObj, name);
     });
 
     // When user chooses weapon

@@ -3,7 +3,7 @@
 let Classes = require("./classes.js");
 Classes.Gauntlet = {};
 
-  function createPlayer(playerClass, PlayerObj) {
+  function createPlayer(playerClass, PlayerObj, name) {
 
     console.log("Classes in Creat: ", Classes);
 
