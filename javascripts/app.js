@@ -50,7 +50,6 @@ $(document).ready(function() {
 
     // When user chooses weapon
     $("#battleButton").click(function(event) {
-        console.log("Setting Health Bar");
         // style="width:0%"
         // Create Enemy
         PlayerObj = Weapons.chooseWeapon(weaponChosen, PlayerObj);
@@ -70,14 +69,10 @@ $(document).ready(function() {
         // console.log("Enemy Strength: ", EnemyObj.strength);
         // console.log("Player Strength: ", PlayerObj.strength);
         if(Battle.attack(PlayerObj, EnemyObj)){
-            console.log("1st True");
-            $("#player2-progress").css("width", '100%');
-            $("#player1-progress").css("width", '100%'); 
+            console.log("1st True"); 
             Battle.printToDom(PlayerObj, EnemyObj);
         }
         if(Battle.attack(EnemyObj, PlayerObj)){
-            $("#player2-progress").css("width", '100%');
-            $("#player1-progress").css("width", '100%'); 
             console.log("2nd True");
             Battle.printToDom(PlayerObj, EnemyObj);
         }else{

@@ -10,12 +10,6 @@ function printToDom(PlayerObj, EnemyObj) {
     var enemyPercentage = ((enemyCurrentHealth / enemyInitialHealth) * 100) + "%";
     var playerPercentage = ((playerCurrentHealth / playerInitialHealth) * 100) + "%";
 
-    console.log("() Enemy Percentage: ", enemyPercentage);
-    console.log("() Player Percentage: ", playerPercentage);
-
-
-
-
     console.log("clicked printToDom");
     $("#player1").empty();
     $("#player2").empty();
@@ -44,21 +38,14 @@ function printToDom(PlayerObj, EnemyObj) {
         </div>
     </div>
     <p><span>${EnemyObj.name}</span> <span class="span-float-right">${EnemyObj.weapon.name}</span></p>
-
     `;
     
-
-
-
-
     $("#player1").append(player1Card);
     $("#player2").append(enemyCard);
   }
 
 
 function attack(defender, attacker){
-
-
     defender.health = defender.health - attacker.strength;
     if(defender.health <= 0){
         defender.health = 0;
