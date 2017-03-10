@@ -6,15 +6,32 @@ function printToDom(PlayerObj, EnemyObj) {
     console.log("clicked printToDom");
     $("#player1").empty();
     $("#player2").empty();
-    let player1Card =   `<p>Player Name: ${PlayerObj.playerName}</p>
-    <p>Fighter Class: ${PlayerObj.name}</p>
-    <p>Weapon: ${PlayerObj.weapon}</p>
-    <p>Health: ${PlayerObj.health}</p>
+
+    /////// Card Order ///////
+    // Player name
+    // HP
+    // Class & Weapon (Left to Right)
+
+    let player1Card =   `<p>Elder Sage${PlayerObj.playerName}</p>
+    <p>HP: ${PlayerObj.health}</p>
+    <div class="progress">
+        <div class="progress-bar progress-edit" role="progressbar" aria-valuenow="40"
+        aria-valuemin="0" aria-valuemax="100" style="width:100%">
+            <span class="sr-only">70% Complete</span>
+        </div>
+    </div>
+    <p><span>${PlayerObj.name}</span> <span class="span-float-right">${PlayerObj.weapon}</span></p>
     `;
     let enemyCard = `<p>Player Name: ???</p>
-    <p>Fighter Class: ${EnemyObj.name}</p>
-    <p>Weapon: ${EnemyObj.weapon}</p>
-    <p>Health: ${EnemyObj.health}</p>
+    <p>HP: ${EnemyObj.health}</p>
+    <div class="progress">
+        <div class="progress-bar progress-edit" role="progressbar" aria-valuenow="70"
+        aria-valuemin="0" aria-valuemax="100" style="width:70%">
+            <span class="sr-only">70% Complete</span>
+        </div>
+    </div>
+    <p><span>${EnemyObj.name}</span> <span class="span-float-right">${EnemyObj.weapon.name}</span></p>
+
     `;
                           
     $("#player1").append(player1Card);

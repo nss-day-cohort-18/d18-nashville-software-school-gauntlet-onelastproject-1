@@ -93,7 +93,7 @@ $(document).ready(function() {
             hands: 2,
             damage: (Math.floor(Math.random() * 50) + 1)
         };
-        EnemyObj.Weapon = Flamethrower;
+        EnemyObj.weapon = Flamethrower;
         return EnemyObj;
     }
  
