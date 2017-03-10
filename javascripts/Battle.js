@@ -1,7 +1,20 @@
 "use strict";
 
 function printToDom(PlayerObj, EnemyObj) {
-    console.log("EnemyObject: ", EnemyObj);
+    var enemyInitialHealth = EnemyObj.initialHealth;
+    var enemyCurrentHealth = EnemyObj.health;
+
+    var playerInitialHealth = PlayerObj.initialHealth;
+    var playerCurrentHealth = PlayerObj.health;
+
+    var enemyPercentage = ((enemyCurrentHealth / enemyInitialHealth) * 100) + "%";
+    var playerPercentage = ((playerCurrentHealth / playerInitialHealth) * 100) + "%";
+
+    console.log("() Enemy Percentage: ", enemyPercentage);
+    console.log("() Player Percentage: ", playerPercentage);
+
+
+
 
     console.log("clicked printToDom");
     $("#player1").empty();
@@ -12,34 +25,39 @@ function printToDom(PlayerObj, EnemyObj) {
     // HP
     // Class & Weapon (Left to Right)
 
-    let player1Card =   `<p>Elder Sage${PlayerObj.playerName}</p>
+    let player1Card =   `<p>Elder Sage ${PlayerObj.playerName}</p>
     <p>HP: ${PlayerObj.health}</p>
     <div class="progress">
-        <div class="progress-bar progress-edit" role="progressbar" aria-valuenow="40"
-        aria-valuemin="0" aria-valuemax="100" style="width:100%">
+        <div id="player1-progress" class="progress-bar progress-edit" role="progressbar" aria-valuenow="40"
+        aria-valuemin="0" aria-valuemax="100" style="width:${playerPercentage}">
             <span class="sr-only">70% Complete</span>
         </div>
     </div>
     <p><span>${PlayerObj.name}</span> <span class="span-float-right">${PlayerObj.weapon}</span></p>
     `;
-    let enemyCard = `<p>Player Name: ???</p>
+    let enemyCard = `<p>???</p>
     <p>HP: ${EnemyObj.health}</p>
     <div class="progress">
-        <div class="progress-bar progress-edit" role="progressbar" aria-valuenow="70"
-        aria-valuemin="0" aria-valuemax="100" style="width:70%">
+        <div id="player2-progress"  class="progress-bar progress-edit" role="progressbar" aria-valuenow="70"
+        aria-valuemin="0" aria-valuemax="100" style="width:${enemyPercentage}">
             <span class="sr-only">70% Complete</span>
         </div>
     </div>
     <p><span>${EnemyObj.name}</span> <span class="span-float-right">${EnemyObj.weapon.name}</span></p>
 
     `;
-                          
+    
+
+
+
+
     $("#player1").append(player1Card);
     $("#player2").append(enemyCard);
   }
 
 
 function attack(defender, attacker){
+
 
     defender.health = defender.health - attacker.strength;
     if(defender.health <= 0){

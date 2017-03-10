@@ -20,6 +20,7 @@ Gauntlet.Combatants.Player = function(name) {
   // Link the name entered in
   this.playerName = $("#player-name").val() || "unknown adventurer";
   this.health = Math.floor(Math.random() * 40 + 50);
+  this.initialHealth = this.health;
   this.limbs = ["head", "neck", "arm", "leg", "torso"];
   this.skinColor = "gray";
   this.skinColors = [this.skinColor];
