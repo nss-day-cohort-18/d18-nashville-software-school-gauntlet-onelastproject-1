@@ -45,6 +45,7 @@ function attack(defender, attacker){
     if(defender.health <= 0){
         defender.health = 0;
         finalScreen(defender, attacker);
+
         return false;
     }else{
         return true;
@@ -62,6 +63,7 @@ function finalScreen(defender, attacker){
     console.log("GAME OVER -- ", defender.name + " LOSES");
     console.log("ATTACKER: ", attacker);
     console.log("DEFENDER: ", defender);
+    $("#getCodeModal").modal('show');
 }
 
 module.exports={printToDom, attack, populateNewHealth};
