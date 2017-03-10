@@ -50,11 +50,13 @@ $(document).ready(function() {
 
     // When user chooses weapon
     $("#battleButton").click(function(event) {
-        // Set Player Weapon
+        // style="width:0%"
         // Create Enemy
         PlayerObj = Weapons.chooseWeapon(weaponChosen, PlayerObj);
         EnemyObj = createEnemy();
         Battle.printToDom(PlayerObj, EnemyObj);
+        $("#player2-progress").css("width", '100%');
+        $("#player1-progress").css("width", '100%');        
         console.log("FINAL ENEMY: ", EnemyObj);
     });
 
@@ -67,7 +69,7 @@ $(document).ready(function() {
         // console.log("Enemy Strength: ", EnemyObj.strength);
         // console.log("Player Strength: ", PlayerObj.strength);
         if(Battle.attack(PlayerObj, EnemyObj)){
-            console.log("1st True");
+            console.log("1st True"); 
             Battle.printToDom(PlayerObj, EnemyObj);
         }
         if(Battle.attack(EnemyObj, PlayerObj)){
@@ -81,10 +83,11 @@ $(document).ready(function() {
 
     // Creates the random enemy
     function createEnemy () {
-
+        let tempHealth = (Math.floor(Math.random() * 75) + 20).toFixed(0);
         EnemyObj = {
             name: "Enemy",
-            health: (Math.floor(Math.random() * 75) + 20).toFixed(0),
+            health: tempHealth,
+            initialHealth: tempHealth,
             strength: (Math.floor(Math.random() * 50) + 1.8).toFixed(0),
             intelligence: (Math.floor(Math.random() * 51) + 1.1).toFixed(0),
         };
