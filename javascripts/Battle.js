@@ -21,6 +21,7 @@ function printToDom(PlayerObj, EnemyObj) {
 
     let player1Card =   `<p>Elder Sage ${PlayerObj.playerName}</p>
     <p>HP: ${PlayerObj.health}</p>
+    <img class="player-image" src="img/player.png" alt="IMAGE 2">
     <div class="progress">
         <div id="player1-progress" class="progress-bar progress-edit" role="progressbar" aria-valuenow="40"
         aria-valuemin="0" aria-valuemax="100" style="width:${playerPercentage}">
@@ -29,8 +30,9 @@ function printToDom(PlayerObj, EnemyObj) {
     </div>
     <p><span>${PlayerObj.name}</span> <span class="span-float-right">${PlayerObj.weapon}</span></p>
     `;
-    let enemyCard = `<p>???</p>
+    let enemyCard = `<p>Evil Adam</p>
     <p>HP: ${EnemyObj.health}</p>
+    <img class="player-image" src="img/adam.png" alt="IMAGE 2">
     <div class="progress">
         <div id="player2-progress"  class="progress-bar progress-edit" role="progressbar" aria-valuenow="70"
         aria-valuemin="0" aria-valuemax="100" style="width:${enemyPercentage}">
@@ -46,6 +48,19 @@ function printToDom(PlayerObj, EnemyObj) {
 
 
 function attack(defender, attacker){
+
+
+
+    // var criticalHit = (Math.floor(Math.random() * 10) + 1).toFixed(0);
+    // var myIntel = attacker.intelligence;
+    // var intel = parseInt(attacker.intelligence);
+
+    // console.log("Critical (1-10): ", criticalHit);
+    // console.log("Intel: ", intel);
+    // console.log("MyIntel: ", myIntel);
+
+    // console.log("CRITICAL HIT: ", criticalHit);
+
     defender.health = defender.health - attacker.strength;
     if(defender.health <= 0){
         defender.health = 0;

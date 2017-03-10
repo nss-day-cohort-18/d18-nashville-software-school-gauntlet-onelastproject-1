@@ -190,5 +190,11 @@ body {
   text-align: center !important;
 }
 
+.player-image{
+  max-height: 200px;
+  max-width: 200px;
+  margin-bottom: 5%;
+} 
+
 
 
