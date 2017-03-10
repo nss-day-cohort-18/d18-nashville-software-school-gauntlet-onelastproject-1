@@ -50,7 +50,6 @@ function attack(defender, attacker){
     if(defender.health <= 0){
         defender.health = 0;
         finalScreen(defender, attacker);
-
         return false;
     }else{
         return true;
@@ -64,11 +63,22 @@ function populateNewHealth(myPlayerObj, myEnemyObj){
 	console.log("[AFTER ATTACK] Enemy Health: ", myEnemyObj.health);
 }
 
-function finalScreen(defender, attacker){
-    console.log("GAME OVER -- ", defender.name + " LOSES");
-    console.log("ATTACKER: ", attacker);
-    console.log("DEFENDER: ", defender);
-    $("#getCodeModal").modal('show');
+function finalScreen(loser, winner){
+    console.log("GAME OVER -- ", loser.name + " LOSES");
+    console.log("ATTACKER: ", winner);
+    console.log("DEFENDER: ", loser);
+
+
+
+    var gameOverCard = `<p>${winner.playerName} won with a fatal strike from the ${winner.weapon}!</p>
+                        <p>Poor ${loser.playerName} lost!</p>`;
+
+        // Player wins
+        $("#gameOverTarget").append(gameOverCard);
+        $("#getCodeModal").modal('show');
+
+    
+
 }
 
 module.exports={printToDom, attack, populateNewHealth};

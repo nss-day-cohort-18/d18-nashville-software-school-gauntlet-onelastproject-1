@@ -86,6 +86,7 @@ $(document).ready(function() {
         let tempHealth = (Math.floor(Math.random() * 75) + 20).toFixed(0);
         EnemyObj = {
             name: "Enemy",
+            playerName: "Adam",
             health: tempHealth,
             initialHealth: tempHealth,
             strength: (Math.floor(Math.random() * 50) + 1.8).toFixed(0),
