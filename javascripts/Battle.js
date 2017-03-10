@@ -79,21 +79,42 @@ function populateNewHealth(myPlayerObj, myEnemyObj){
 }
 
 function finalScreen(loser, winner){
+
+    var gameOverCard;
     console.log("GAME OVER -- ", loser.name + " LOSES");
     console.log("ATTACKER: ", winner);
     console.log("DEFENDER: ", loser);
 
+    if(winner.health === 0 && loser.health === 0){
+        console.log("THIS DRAW WORKS!");
+        gameOverCard = `<p>Both ${winner} & ${loser} have been slain. It's a draw!</p>`;
+    }
+    else {
+        gameOverCard = `<p>${winner.playerName} won with a fatal strike from the ${winner.weapon.name}!</p>
+                            <p>Poor ${loser.playerName} lost!</p>`;
+    }
 
 
-    var gameOverCard = `<p>${winner.playerName} won with a fatal strike from the ${winner.weapon}!</p>
-                        <p>Poor ${loser.playerName} lost!</p>`;
 
-        // Player wins
-        $("#gameOverTarget").append(gameOverCard);
-        $("#getCodeModal").modal('show');
 
-    
+    // Player wins
+    $("#gameOverTarget").append(gameOverCard);
+    $("#getCodeModal").modal('show');
+
+
+    $("#attackButton").hide();
+    $("#battle-back-button").hide();
+    $("#game-reset").removeClass('hidden');
+
+
 
 }
+
+$("#game-reset").click(function(event) {
+    /* Act on the event */
+   window.location.reload("#");
+});
+
+
 
 module.exports={printToDom, attack, populateNewHealth};
