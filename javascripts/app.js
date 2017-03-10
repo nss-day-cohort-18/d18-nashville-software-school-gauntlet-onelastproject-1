@@ -63,11 +63,11 @@ $(document).ready(function() {
 // Attack Button
     $("#attackButton").click(function(event) {        
 
-        // console.log("Enemy Health: ", EnemyObj.health);
-        // console.log("Player Health: ", PlayerObj.health);
+        console.log("----------- Enemy Health: ", EnemyObj.health);
+        console.log("----------- Player Health: ", PlayerObj.health);
         // console.log("-----------------");
-        // console.log("Enemy Strength: ", EnemyObj.strength);
-        // console.log("Player Strength: ", PlayerObj.strength);
+        console.log("----------- Enemy Strength: ", EnemyObj.strength);
+        console.log("----------- Player Strength: ", PlayerObj.strength);
         if(Battle.attack(PlayerObj, EnemyObj)){
             console.log("1st True"); 
             Battle.printToDom(PlayerObj, EnemyObj);
@@ -83,20 +83,20 @@ $(document).ready(function() {
 
     // Creates the random enemy
     function createEnemy () {
-        let tempHealth = (Math.floor(Math.random() * 75) + 20).toFixed(0);
+        let tempHealth = (Math.floor(Math.random() * 175) + 100).toFixed(0);
         EnemyObj = {
             name: "Enemy",
             health: tempHealth,
             initialHealth: tempHealth,
             strength: (Math.floor(Math.random() * 50) + 1.8).toFixed(0),
-            intelligence: (Math.floor(Math.random() * 51) + 1.1).toFixed(0),
+            intelligence: (Math.floor(Math.random() * 5) + 1).toFixed(0),
         };
-        var Flamethrower = {
-            name: "Flamethrower",
+        var FingersOfFury = {
+            name: "Fingers of Fury",
             hands: 2,
             damage: (Math.floor(Math.random() * 50) + 1)
         };
-        EnemyObj.weapon = Flamethrower;
+        EnemyObj.weapon = FingersOfFury;
         return EnemyObj;
     }
  
