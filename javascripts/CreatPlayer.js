@@ -3,7 +3,7 @@
 let Classes = require("./classes.js");
 Classes.Gauntlet = {};
 
-  function createPlayer(playerClass, PlayerObj) {
+  function createPlayer(playerClass, PlayerObj, name) {
 
     console.log("Classes in Creat: ", Classes);
 
@@ -12,6 +12,7 @@ Classes.Gauntlet = {};
       case "Warrior":
 
         PlayerObj = new Classes.Player.Gauntlet.GuildHall.Warrior(name);
+        console.log("NAME: ", name);
         PlayerObj.setClass("Warrior");
         
         break;
