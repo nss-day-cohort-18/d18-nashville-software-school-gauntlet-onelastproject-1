@@ -3,6 +3,8 @@ body {
   margin: 0;
   padding: 10px;
   font-size: 3em;
+  color: white;
+  background-color: black;
 }
 
 .field {
@@ -14,6 +16,11 @@ body {
   padding: 15px 0;
   text-align: center;
   min-width: 500px;
+  color: black;
+}
+
+.field__textinput:focus {
+  outline: 0;
 }
 
 
@@ -86,8 +93,8 @@ body {
 }
 
 .btn--blue:focus {
-  border-color: black;
-  background-color: black;
+  border-color: green;
+  background-color: green;
   color: white;
   outline: 0;
 }
@@ -105,8 +112,8 @@ body {
 }
 
 .btn--yellow:focus {
-  border-color: black;
-  background-color: black;
+  border-color: green;
+  background-color: green;
   color: white;
 }
 
@@ -138,3 +145,50 @@ body {
   padding: 0 50px 0 20px;
   border-radius: 0 5px 5px 0;
 }
+
+/* Battle Scene */
+
+#player1, #player2 {
+  background-color: #336699;
+  color: white;
+  border: 1px black solid;
+  border-radius: 5px;
+  padding: 0 1em;
+}
+
+.span-float-right {
+  float: right;
+}
+
+.progress-edit {
+  background-color: firebrick !important;
+}
+
+#attackButton {
+  background-color: #FF4136;
+  color: white;
+}
+
+#attackButton:hover {
+  border-color: #cc0a00;
+  background-color: #cc0a00;
+  color: white;
+}
+
+#attackButton:active {
+  border-color: firebrick;
+  background-color: firebrick;
+  color: white;
+  margin: 0 auto;
+}
+
+#battleground > h2 {
+  text-align: center;
+}
+
+#battleground > button {
+  text-align: center !important;
+}
+
+
+

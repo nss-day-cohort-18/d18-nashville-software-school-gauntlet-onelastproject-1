@@ -1,13 +1,56 @@
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
 "use strict";
 
+function printToDom(PlayerObj, EnemyObj) {
+    console.log("EnemyObject: ", EnemyObj);
 
-function attack(myPlayerObj, myEnemyObj){
+    console.log("clicked printToDom");
+    $("#player1").empty();
+    $("#player2").empty();
 
-	// myPlayerObj.health = myPlayerObj.health - myEnemyObj.strength;
-	// myEnemyObj.health = myEnemyObj.health - myPlayerObj.strength;
-	console.log("[MID] PlayerOBj Damage: ", myPlayerObj.strength - myPlayerObj.strengthBonus);
-	console.log("[MID] EnemyObj Damage: ", myEnemyObj.strength - myEnemyObj.strengthBonus);
+    /////// Card Order ///////
+    // Player name
+    // HP
+    // Class & Weapon (Left to Right)
+
+    let player1Card =   `<p>Elder Sage${PlayerObj.playerName}</p>
+    <p>HP: ${PlayerObj.health}</p>
+    <div class="progress">
+        <div class="progress-bar progress-edit" role="progressbar" aria-valuenow="40"
+        aria-valuemin="0" aria-valuemax="100" style="width:100%">
+            <span class="sr-only">70% Complete</span>
+        </div>
+    </div>
+    <p><span>${PlayerObj.name}</span> <span class="span-float-right">${PlayerObj.weapon}</span></p>
+    `;
+    let enemyCard = `<p>Player Name: ???</p>
+    <p>HP: ${EnemyObj.health}</p>
+    <div class="progress">
+        <div class="progress-bar progress-edit" role="progressbar" aria-valuenow="70"
+        aria-valuemin="0" aria-valuemax="100" style="width:70%">
+            <span class="sr-only">70% Complete</span>
+        </div>
+    </div>
+    <p><span>${EnemyObj.name}</span> <span class="span-float-right">${EnemyObj.weapon.name}</span></p>
+
+    `;
+                          
+    $("#player1").append(player1Card);
+    $("#player2").append(enemyCard);
+  }
+
+
+function attack(defender, attacker){
+
+    defender.health = defender.health - attacker.strength;
+    if(defender.health <= 0){
+        defender.health = 0;
+        finalScreen(defender, attacker);
+        return false;
+    }else{
+        return true;
+    }
+    console.log("Defender Health: ", defender.health);
 
 }
 
@@ -15,6 +58,14 @@ function populateNewHealth(myPlayerObj, myEnemyObj){
 	console.log("[AFTER ATTACK] MyPlayer Health: ", myPlayerObj.health);
 	console.log("[AFTER ATTACK] Enemy Health: ", myEnemyObj.health);
 }
+
+function finalScreen(defender, attacker){
+    console.log("GAME OVER -- ", defender.name + " LOSES");
+    console.log("ATTACKER: ", attacker);
+    console.log("DEFENDER: ", defender);
+}
+
+module.exports={printToDom, attack, populateNewHealth};
 },{}],2:[function(require,module,exports){
 "use strict";
 
@@ -49,10 +100,10 @@ function populateNewHealth(myPlayerObj, myEnemyObj){
         PlayerObj.setWeapon(new Weapons.Spear());
         console.log("object after Spear", PlayerObj);
         break;
-      case "Warhammer":
-        console.log(" switch Warhammer");
-        PlayerObj.setWeapon(new Weapons.Warhammer());
-        console.log("object after Warhammer", PlayerObj);
+      case "WarHammer":
+        console.log(" switch War Hammer");
+        PlayerObj.setWeapon(new Weapons.WarHammer());
+        console.log("object after WarHammer", PlayerObj);
         break;
       case "Club":
         console.log(" switch Club");
@@ -65,6 +116,7 @@ function populateNewHealth(myPlayerObj, myEnemyObj){
         console.log("object after LongSword", PlayerObj);
         break;
     }
+    return PlayerObj;
   }
 
 module.exports = {chooseWeapon};
@@ -163,7 +215,6 @@ Classes.Gauntlet = {};
 },{"./classes.js":5}],4:[function(require,module,exports){
 "use strict";
 
-
 var name;
 var playerClass;
 var EnemyObj = {};
@@ -173,6 +224,7 @@ var weaponChosen;
 let Gauntlet = require("./classes.js");
 let CreatePlayer = require("./CreatPlayer.js");
 let Weapons = require("./ChooseWeapon.js");
+let Battle = require("./Battle.js");
 
 
 $(document).ready(function() {
@@ -213,23 +265,33 @@ $(document).ready(function() {
 
     // When user chooses weapon
     $("#battleButton").click(function(event) {
-        var weaponOfChoice = Weapons.chooseWeapon(weaponChosen, PlayerObj);
-
-
-        // Enemy
-        var myEnemy = createEnemy();
-
-
-        console.log("FINAL ENEMY: ", myEnemy);
-
+        // Set Player Weapon
+        // Create Enemy
+        PlayerObj = Weapons.chooseWeapon(weaponChosen, PlayerObj);
+        EnemyObj = createEnemy();
+        Battle.printToDom(PlayerObj, EnemyObj);
+        console.log("FINAL ENEMY: ", EnemyObj);
     });
 
 // Attack Button
     $("#attackButton").click(function(event) {        
 
-        console.log("[BEFORE] Player 1 Damage: ", PlayerObj.strength);
-
-
+        // console.log("Enemy Health: ", EnemyObj.health);
+        // console.log("Player Health: ", PlayerObj.health);
+        // console.log("-----------------");
+        // console.log("Enemy Strength: ", EnemyObj.strength);
+        // console.log("Player Strength: ", PlayerObj.strength);
+        if(Battle.attack(PlayerObj, EnemyObj)){
+            console.log("1st True");
+            Battle.printToDom(PlayerObj, EnemyObj);
+        }
+        if(Battle.attack(EnemyObj, PlayerObj)){
+            console.log("2nd True");
+            Battle.printToDom(PlayerObj, EnemyObj);
+        }else{
+            Battle.printToDom(PlayerObj, EnemyObj);
+            console.log("GAME 2 ELSE");
+        }
     });
 
     // Creates the random enemy
@@ -237,17 +299,16 @@ $(document).ready(function() {
 
         EnemyObj = {
             name: "Enemy",
-            healthBonus: (Math.floor(Math.random() * 49) + 1.5).toFixed(0),
-            strengthBonus: (Math.floor(Math.random() * 50) + 1.8).toFixed(0),
-            intelligenceBonus: (Math.floor(Math.random() * 51) + 1.1).toFixed(0),
+            health: (Math.floor(Math.random() * 75) + 20).toFixed(0),
+            strength: (Math.floor(Math.random() * 50) + 1.8).toFixed(0),
+            intelligence: (Math.floor(Math.random() * 51) + 1.1).toFixed(0),
         };
-        
         var Flamethrower = {
             name: "Flamethrower",
             hands: 2,
             damage: (Math.floor(Math.random() * 50) + 1)
         };
-        EnemyObj.Weapon = Flamethrower;
+        EnemyObj.weapon = Flamethrower;
         return EnemyObj;
     }
  
@@ -286,7 +347,7 @@ $(document).ready(function() {
     });
 
 });
-},{"./ChooseWeapon.js":2,"./CreatPlayer.js":3,"./classes.js":5}],5:[function(require,module,exports){
+},{"./Battle.js":1,"./ChooseWeapon.js":2,"./CreatPlayer.js":3,"./classes.js":5}],5:[function(require,module,exports){
 "use strict";
 
 /*
