@@ -65,7 +65,6 @@ $(document).ready(function() {
 
         console.log("----------- Enemy Health: ", EnemyObj.health);
         console.log("----------- Player Health: ", PlayerObj.health);
-        // console.log("-----------------");
         console.log("----------- Enemy Strength: ", EnemyObj.strength);
         console.log("----------- Player Strength: ", PlayerObj.strength);
         if(Battle.attack(PlayerObj, EnemyObj)){
