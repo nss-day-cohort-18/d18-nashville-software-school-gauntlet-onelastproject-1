@@ -4,7 +4,7 @@ let Classes = require("./classes.js");
 Classes.Gauntlet = {};
 
   function createPlayer(playerClass, PlayerObj, name) {
-
+    console.log("called createPlayer with this name: ", name);
     console.log("Classes in Creat: ", Classes);
 
     // Switch statement that will assign the class to the user

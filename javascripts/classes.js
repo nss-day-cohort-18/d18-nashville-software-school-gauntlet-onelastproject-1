@@ -8,6 +8,7 @@ let Player = require("./player.js");
 Player.Gauntlet.GuildHall = {};
 
 let CreatePlayer = require("./CreatPlayer.js");
+console.log("CreatePlayer at the top of classes: ", CreatePlayer);
 /*
   Base function for a player, or enemy, class (profession)
  */
@@ -182,9 +183,8 @@ Player.Gauntlet.GuildHall.Stealth.prototype = new Player.Gauntlet.GuildHall.Play
 
 
 
-  Player.Gauntlet.GuildHall.Random = function(playerObj) {
-
-
+  Player.Gauntlet.GuildHall.Random = function(name) {
+    console.log("name at random: ", name);
     var randomSkin;
 
     this.species = "Human";
@@ -199,8 +199,8 @@ Player.Gauntlet.GuildHall.Stealth.prototype = new Player.Gauntlet.GuildHall.Play
     var random = Math.round(Math.random() * (randomClasses.length - 1));
     // Get the string at the index
     var randomClass = randomClasses[random];
-    var randomPlayer = CreatePlayer.createPlayer(randomClass, playerObj);
-    return randomPlayer;
+    this.name = randomClass;
+    this.playerName = name;
 
   };
   Player.Gauntlet.GuildHall.Random.prototype = new Player.Gauntlet.GuildHall.PlayerClass();
