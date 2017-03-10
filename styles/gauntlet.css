@@ -196,5 +196,15 @@ body {
   margin-bottom: 5%;
 } 
 
+#game-reset {
+  background-color: green !important;
+  border-color: green !important;
+  color: white !important;
+}
+
+#game-reset:hover {
+  background-color: darkgreen !important;
+  border-color: darkgreen !important;
+}
 
 
