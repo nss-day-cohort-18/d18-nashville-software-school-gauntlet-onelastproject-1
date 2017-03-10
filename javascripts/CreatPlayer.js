@@ -12,7 +12,6 @@ Classes.Gauntlet = {};
       case "Warrior":
 
         PlayerObj = new Classes.Player.Gauntlet.GuildHall.Warrior(name);
-        console.log("NAME: ", name);
         PlayerObj.setClass("Warrior");
         
         break;
